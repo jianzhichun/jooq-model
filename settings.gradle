@@ -1,0 +1,4 @@
+rootProject.name = 'jooq-model'
+include 'spi'
+include 'metadata'
+
