@@ -1,14 +1,24 @@
 plugins {
     id 'java'
+    id 'war'
+    id 'com.intershop.gradle.jaxb' version '4.3.1'
 }
 
 group 'org.jianzhichun'
 version '1.0.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
+dependencies {
+
+    providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+jaxb {
+    schemaGen {
+        model {
+            inputDir = file('src/main/java')
+            excludes = ['//*Adapter.java']
+            namespaceconfigs = [ 'http://jianzhichun.org/model' : 'model.xsd' ]
+        }
+    }
 }
